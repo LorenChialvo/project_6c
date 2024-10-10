@@ -5,16 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Laboratorios SAC</title>
     <style>
+        html{
+            scroll-behavior: smooth;
+        }
         :root{
             --primarycolor:#007bff;
+            --goldcolor: linear-gradient(45deg, #d4af37, #e5c072, #f4d77f, #e2b854, #caa52f);
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Red Hat Text', sans-serif;
         }
         body {
             line-height: 1.6;
@@ -27,6 +32,8 @@
             background-color: #fff;
             padding: 1rem 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%;
+            position: fixed;
         }
         nav {
             display: flex;
@@ -43,25 +50,34 @@
             display: flex;
         }
         .nav-links li {
-            margin-left: 1rem;
+            margin: 10px;
         }
+        li.active a {
+            
+            border-bottom: 1px solid #000;
+            }
         .nav-links a {
+            padding: 5px;
             text-decoration: none;
             color: #333;
         }
         .hero {
-            background-image: url('https://via.placeholder.com/1500x600/333333/ffffff?text=Laboratorio');
+            background-image: url(/static/img/img_home.png);
             background-size: cover;
             background-position: center;
             color: #fff;
             padding: 4rem 0;
             text-align: center;
+            height: 90vh;
+            align-items: center;
+            display: flex;
         }
         .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-family: 'Red Hat Text', sans-serif;
         }
         .hero p {
+            text-align: start;
             font-size: 1.2rem;
             margin-bottom: 2rem;
         }
@@ -82,7 +98,6 @@
         }
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
         .service-card {
@@ -90,17 +105,20 @@
             border-radius: 5px;
             padding: 1rem;
             text-align: center;
+            display: flex;
+            justify-content: start;
         }
+        
         .service-card img {
-            width: 100%;
-            height: 200px;
+            width: auto;
+            height: 150px;
             object-fit: cover;
-            margin-bottom: 1rem;
         }
         .patient-portal {
-            background-color: #f8f9fa;
+            background-color: #d6d6d6;
             padding: 4rem 0;
         }
+        
         .patient-portal-content {
             display: flex;
             align-items: center;
@@ -109,6 +127,9 @@
         .patient-portal-text {
             flex: 1;
             padding-right: 2rem;
+        }
+        .patient-portal-text h1 {
+            font-size: 40px;
         }
         .patient-portal-image {
             flex: 1;
@@ -243,16 +264,55 @@
         a i.fa-whatsapp{color: #25D366;}
         a i.fa-facebook {color: #2c4dc7;}
         a i.fa-twitter {color: #007bb5;}
+
+    .logo_prin{
+            width:auto;
+            height:50px;
+        }
+        div#cont_top {
+            margin: 20px;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+        }
+        #btn-gold{
+            background: var(--goldcolor);   
+            color:#000;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 100px;
+            border: 1px solid #000;
+        }
+        a#btn-gold:hover {
+            border: 1px solid #fff;
+        }
+        .cont_int a {
+            margin-top: 10px;
+        }
+
+        .cont_int {
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            margin-left: 20px;
+        }
+        .mt-2{
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo">Laboratorios SAC</div>
+            <img src="{% static '/img/logo-sac.png' %}" class="logo_prin" alt="">
             <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
+                <li class="active"><a href="#inicio" >Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#pacientes">Pacientes</a></li>
-                <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
                 <li><a href="#reservar-cita">Reservar Cita</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -260,49 +320,59 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Laboratorios SAC</h1>
-                <p>Expertos en la salud y tu bienestar</p>
-                <a href="#" class="btn">Saber Más</a>
+        <section class="hero"  id="inicio">
+            <div class="container" id="cont_top">
+                <h1>Laboratorios <span style="color:var(--primarycolor);">SAC</span></h1>
+                <h5>Expertos en la salud y tu bienestar</h5>
+                <p>Nos dedicamos a proporcionar servicios de análisis y diagnóstico de alta calidad. Nuestro equipo de expertos utiliza tecnología de vanguardia para realizar pruebas precisas y confiables, contribuyendo al bienestar y la salud de nuestros pacientes. Ofrecemos una amplia gama de servicios, incluyendo análisis clínicos, pruebas genéticas, estudios de metabolismo y mucho más.</p>
+                <a href="#" class="btn" id="btn-gold">Saber Más</a>
             </div>
         </section>
 
-        <section class="services">
+        <section class="services" id="servicios">
             <div class="container">
                 <h2>Nuestros Servicios</h2>
                 <div class="service-grid">
                     <div class="service-card">
-                        <img src="https://via.placeholder.com/300x200?text=Turnos" alt="Turnos">
-                        <h3>Turnos</h3>
+                        <img src="{% static '/img/img_c1.png' %}" alt="Turnos">
+                        <div class="cont_int">
+                            <h3>Turnos</h3>
                         <p>Mira cómo programar una consulta virtual o presencial con nosotros desde aquí</p>
                         <a href="#" class="btn">Saber Más</a>
+                        </div>
                     </div>
                     <div class="service-card">
-                        <img src="https://via.placeholder.com/300x200?text=Especialidades+médicas" alt="Especialidades médicas">
-                        <h3>Especialidades médicas</h3>
+                        <img src="{% static '/img/img_c2.png' %}" alt="Especialidades médicas">
+                        <div class="cont_int">
+                            <h3>Especialidades médicas</h3>
                         <p>Tu cuidado es importante, y el de los tuyos también. Conocé todas nuestras especialidades médicas aquí</p>
                         <a href="#" class="btn">Saber Más</a>
+                        </div>
+
+                        
                     </div>
                     <div class="service-card">
-                        <img src="https://via.placeholder.com/300x200?text=Análisis+Clínicos+Completos" alt="Análisis Clínicos Completos">
-                        <h3>Análisis Clínicos Completos</h3>
+                        <img src="{% static '/img/img_c3.png' %}" alt="Análisis Clínicos Completos">
+                        <div class="cont_int">
+                            <h3>Análisis Clínicos Completos</h3>
                         <p>Ofrecemos una amplia gama de análisis que evalúan componentes específicos de la sangre y otros fluidos corporales, proporcionando una visión integral del estado de salud del paciente.</p>
                         <a href="#" class="btn">Saber Más</a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="patient-portal">
+        <section class="patient-portal" id="pacientes">
             <div class="container patient-portal-content">
                 <div class="patient-portal-text">
-                    <h2>Portal del Paciente</h2>
+                    <h1>Portal del <span style="color:var(--primarycolor);">Paciente</span></h1>    
                     <p>Accede de manera segura a tus resultados de laboratorio, historial médico y citas programadas. Gestiona tu salud fácilmente desde cualquier lugar y en cualquier momento.</p>
-                    <a href="#" class="btn">Ir a Mi Portal</a>
+                    <a href="#" class="btn mt-2" id="btn-gold">Ir a Mi Portal</a>
                 </div>
                 <div class="patient-portal-image">
-                    <img src="https://via.placeholder.com/500x300?text=Portal+del+Paciente" alt="Portal del Paciente">
+                    <img src="{% static '/img/img_port.png' %}" alt="Portal del Paciente">
                 </div>
             </div>
         </section>
@@ -373,15 +443,6 @@
     <script>
         // JavaScript para funcionalidad adicional
         document.addEventListener('DOMContentLoaded', function() {
-            // Ejemplo: Cambiar el color del encabezado al hacer scroll
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 50) {
-                    header.style.backgroundColor = '#f8f9fa';
-                } else {
-                    header.style.backgroundColor = '#fff';
-                }
-            });
 
             // Ejemplo: Agregar un evento de clic a los botones "Saber Más"
             const buttons = document.querySelectorAll('.btn');
@@ -392,6 +453,33 @@
                 });
             });
         });
+        document.addEventListener("DOMContentLoaded", () => {
+            // Obtener todos los enlaces del menú
+            const navLinks = document.querySelectorAll(".nav-links li a");
+
+            // Función para cambiar la clase activa basada en el scroll
+            function setActiveLinkOnScroll() {
+                navLinks.forEach(link => {
+                // Obtener el id de la sección a la que apunta el enlace
+                const section = document.querySelector(link.getAttribute("href"));
+                
+
+                // Comprobar si la posición actual del scroll está dentro de la sección
+
+                });
+            }
+
+            // Escuchar el evento de scroll para activar la clase en base a la posición
+            window.addEventListener("scroll", setActiveLinkOnScroll);
+
+            // También se puede añadir la clase active cuando se hace clic en los enlaces
+            navLinks.forEach(link => {
+                link.addEventListener("click", () => {
+                navLinks.forEach(link => link.parentElement.classList.remove("active"));
+                link.parentElement.classList.add("active");
+                });
+            });
+            });
     </script>
 </body>
 </html>
