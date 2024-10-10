@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin    
 from django.urls import include, path
 from labquim.views import logintemplate
+from labquim.views import inicio
     
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('', include('labquim.urls')),
      path('logintemplate' , logintemplate.as_view()),
+     path('inicio' , inicio.as_view()),
 ]

@@ -12,7 +12,7 @@ class user_form(forms.ModelForm):
         fields = ['dni', 'cap']
         widgets = {
             'dni': forms.TextInput(attrs={'class': 'form-control'}),
-            'cap': forms.Textarea(attrs={'class': 'form-control',}),
+            'cap': forms.TextInput(attrs={'class': 'password-container',}),
         }
 
 

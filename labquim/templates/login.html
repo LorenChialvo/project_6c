@@ -18,15 +18,7 @@
         <p>Inicie sesión para continuar</p>
         <form method="post">
             {% csrf_token %}
-            {{form.as_p}}
-            <label for="dni">DNI</label>
-            <input type="text" id="dni" name="dni" placeholder="Ingrese su DNI" required>
-            
-            <label for="cap">CAP</label>
-            <div class="password-container">
-                <input type="password" id="cap" name="cap" placeholder="Ingrese su CAP" required>
-            </div>
-            
+            {{form_login.as_div}}
             <div class="remember-forgot">
                 <label>
                     <input type="checkbox" name="remember"> Mantener Sesión
