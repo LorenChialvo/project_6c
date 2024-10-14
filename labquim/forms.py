@@ -7,7 +7,7 @@ class user_form(forms.Form):
     hola = forms.CharField(max_length=200)
     
 class user_form(forms.ModelForm):
-    class Meta:
+    class   Meta:
         model = USerForm
         fields = ['dni', 'cap']
         widgets = {
