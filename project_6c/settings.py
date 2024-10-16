@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'project_6c.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'labquim_db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

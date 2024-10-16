@@ -151,11 +151,14 @@
             gap: 2rem;
         }
         .value-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 1rem;
-            text-align: center;
-        }
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 1rem;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
         .value-card img {
             width: 100%;
             height: 150px;
@@ -178,6 +181,7 @@
             align-items: flex-start;
         }
         .footer-logo {
+            margin: 0px 10px;
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -201,18 +205,36 @@
             max-width: 300px;
         }
         .footer-contact {
-            text-align: center;
+            margin: 0px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
         .footer-contact h3 {
             margin-bottom: 10px;
             color: var(--primarycolor);
+        }
+        .footer-contact h5 {
+            text-align: start;
+            display: flex;  
+            width: 100%;
+            color: var(--primarycolor);
+            margin-top: 10px;
+            font-size: 17px;
         }
         .footer-contact p {
             margin: 5px 0;
             color: #666;
         }
         .footer-social {
+            flex-direction: column;
+            height: 150px;
+            display: flex;
+            margin: 0px 10px;
             text-align: center;
+            justify-content: space-evenly;
         }
         .footer-social p {
             margin-bottom: 10px;
@@ -223,12 +245,33 @@
             justify-content: center;
             gap: 10px;
         }
+        .social-icons a {
+            border-radius: 100%;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            text-decoration: none;
+            transition: all 200ms ease-in-out;
+        }
+        .social-icons a:hover{
+            background-color: #000;
+        }
         .social-icons img {
             width: 30px;
             height: 30px;
         }
         .footer-newsletter {
-            text-align: right;
+            margin: 0px 10px;
+            text-align: left;
+        }
+        .footer-newsletter form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: start;
         }
         .footer-newsletter h4 {
             margin-bottom: 10px;
@@ -313,7 +356,7 @@
                 <li class="active"><a href="#inicio" >Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#pacientes">Pacientes</a></li>
-                <li><a href="#reservar-cita">Reservar Cita</a></li>
+                <li><a href="#valores">Valores</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -377,24 +420,27 @@
             </div>
         </section>
 
-        <section class="values">
+        <section class="values" id="valores">
             <div class="container">
                 <h2>Nuestros Valores</h2>
                 <div class="values-grid">
                     <div class="value-card">
-                        <img src="https://via.placeholder.com/300x200?text=Precisión" alt="Precisión">
+                        <img src="{% static '/img/img_v1.png' %}" alt="Precisión">
                         <h3>Precisión</h3>
                         <p>Nos aseguramos de que cada análisis se realice con la máxima exactitud, utilizando tecnología avanzada y métodos rigurosos.</p>
+                        <a href="#" class="btn mt-2">Leer Mas</a>
                     </div>
                     <div class="value-card">
-                        <img src="https://via.placeholder.com/300x200?text=Compromiso" alt="Compromiso">
+                        <img src="{% static '/img/img_v2.png' %}" alt="Compromiso">
                         <h3>Compromiso</h3>
                         <p>Estamos dedicados a ofrecer el mejor servicio posible, centrado en las necesidades personales y únicas de nuestros pacientes.</p>
+                        <a href="#" class="btn mt-2">Leer Mas</a>
                     </div>
                     <div class="value-card">
-                        <img src="https://via.placeholder.com/300x200?text=Confidencialidad" alt="Confidencialidad">
+                        <img src="{% static '/img/img_v3.png' %}" alt="Confidencialidad">
                         <h3>Confidencialidad</h3>
                         <p>Garantizamos la protección de tu información personal y médica, asegurando que tus datos sean manejados con total privacidad y seguridad.</p>
+                        <a href="#" class="btn mt-2">Leer Mas</a>
                     </div>
                 </div>
             </div>
@@ -405,13 +451,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="{% static 'logo-sac.png' %}" alt="">
+                    <img src="{% static '/img/logo-sac.png' %}" alt="">
                     <div class="footer-info">
                         <p>Ofrecemos análisis y diagnósticos de alta precisión con tecnología avanzada, apoyando la salud de nuestros pacientes mediante servicios personalizados y confiables.</p>
                     </div>
                 </div>
                 <div class="footer-contact">
-                    <h3>Ponerse en contacto</h3>
+                    <h5>Ponerse en contacto</h5>
                     <p>Avenida Colón 5420</p>
                     <p>laboratoriosac@gmail.com</p>
                     <p>+1 386-688-3295</p>

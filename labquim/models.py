@@ -18,11 +18,13 @@ class UnidadMed(models.Model):
 
 class Metodo(models.Model):
     id_metodo = models.AutoField(primary_key=True)
-    descripcion = models.CharField(max_length=255)
+    descripcion = models.CharField  (max_length=255)
 
 class TipoDocumento(models.Model):
     id_tipo_documento = models.AutoField(primary_key=True)
     tipo_documento = models.CharField(max_length=255)
+    def __str__(self):
+        return self.tipo_documento
 
 class Paciente(models.Model):
     id_paciente = models.AutoField(primary_key=True)

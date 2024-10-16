@@ -1,0 +1,457 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorios SAC - Ingreso de Datos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0080ff;
+            --secondary-color: #f0f8ff;
+            --text-color: #333;
+            --background-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Figtree', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 2.5rem;
+        }
+
+        h2 {    
+            margin-top: 20px;
+            font-weight: 400;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .form-section {
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Figtree', sans-serif;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0066cc;
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            list-style: none;
+            margin: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+                li {
+            display: flex;
+            margin: 5px;
+            background-color: #0080ff;
+            border-radius: 10px;
+            /* padding-left: 10px; */
+            color: #fff;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Combina bordes */
+            margin: 20px 0; /* Margen superior e inferior */
+        }
+        th, td {
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            text-align: left; 
+        }
+        th {
+            background-color: #f2f2f2; 
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        @media (min-width: 768px) {
+            form {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panel De Administracion</h1>
+    </header>
+
+    <main class="container">
+        <section class="form-section">
+            <h2>Insertar Paciente</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_paciente.as_div }}
+                <input type="hidden" name="form_paciente" value="1">
+                <button type="submit">Agregar Paciente</button> 
+            </form>
+            <h2>Lista Pacientes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Numero de Documento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for paciente in pacientes_list %}
+                        <tr>
+                            <td>{{ paciente.nombre }}</td>
+                            <td>{{ paciente.apellido }}</td>
+                            <td>{{ paciente.email }}</td>
+                            <td>{{ paciente.numero_documento }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay Pacientes disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Medico</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_medico.as_div }}
+                <input type="hidden" name="form_medico" value="1">
+                <button type="submit">Agregar Medico</button> 
+            </form>
+            <h2>Lista Medicos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>nombre</th>
+                        <th>Apellido</th>
+                        <th>Especialidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medico in medicos_list %}
+                        <tr>
+                            <td>{{ medico.nombre }}</td>
+                            <td>{{ medico.apellido }}</td>
+                            <td>{{ medico.especializacion }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay Medicos listados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Extraccionista</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_extrac.as_div }}
+                <input type="hidden" name="form_extrac" value="1">
+                <button type="submit">Agregar Extraccionista</button> 
+            </form>
+            <h2>Lista Extraccionista</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Numero de documento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for extraccionista in list_extraccionistas %}
+                        <tr>
+                            <td>{{ extraccionista.nombre }}</td>
+                            <td>{{ extraccionista.apellido }}</td>
+                            <td>{{ extraccionista.email }}</td>
+                            <td>{{ extraccionista.numero_documento }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay Extraccionistas listados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Metodos Utilizados</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_metodo.as_div }}
+                <input type="hidden" name="form_metodo" value="1">
+                <button type="submit">Agregar Metodo</button> 
+            </form>
+            <h2>Lista Metodos</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Numero de metodo</th>
+                            <th>Metodo Utilizado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for metodo in metodo_list %}
+                            <tr>
+                                <td>{{ metodo.id_metodo }}</td>
+                                <td>{{ metodo.descripcion }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">No hay metodos insertados.</td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+   
+        </section>
+        
+        <section class="form-section">
+            <h2>Insertar Tipo de Documento</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_type_document.as_div }}
+                <input type="hidden" name="form_type_document" value="1">
+                <div>
+                    <button type="submit">Insertar tipo de documento</button>  
+                </div>
+            </form>
+            <table>
+                <h2>Lista Tipos De Documentos</h2>
+                <thead>
+                    <tr>
+                        <th>Id Del Documento</th>
+                        <th>Tipo De Documento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for documents in type_documents %}
+                        <tr>
+                            <td>{{ documents.id_tipo_documento }}</td>
+                            <td>{{ documents.tipo_documento }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay Lista disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Unidad De Medida</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_unimed.as_div }}
+                <input type="hidden" name="form_unimed" value="1">
+                <div>
+                    <button type="submit">Insertar Unidad De Medida</button>  
+                </div>
+            </form>
+            <h2>Lista Unidad De Medida</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id de medida</th>
+                        <th>Medida Utilizada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for unimed in unimed_list %}
+                        <tr>
+                            <td>{{ unimed.cod_unidad_med }}</td>
+                            <td>{{ unimed.nombre }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay Lista disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Estado de Solicitud</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_est_soli.as_div }}
+                <input type="hidden" name="form_est_soli" value="1">
+                <div>
+                    <button type="submit">Insertar estado</button>  
+                </div>
+            </form>
+            <table>
+                <h2>Lista De Estados</h2>
+                <thead>
+                    <tr>
+                        <th>Id del Estado</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for estado in list_estados %}
+                        <tr>
+                            <td>{{ estado.id_estado }}</td>
+                            <td>{{ estado.estado }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay Lista disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Estado de Estudio</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_est_estu.as_div }}
+                <input type="hidden" name="form_est_estu" value="1">
+                <div>
+                    <button type="submit">Insertar estado</button>  
+                </div>
+            </form>
+            <table>
+                <h2>Lista De Estados De Estudios</h2>
+                <thead>
+                    <tr>
+                        <th>Id del Estado</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for estado in list_estados_estudio %}
+                        <tr>
+                            <td>{{ estado.id_estado }}</td>
+                            <td>{{ estado.estado }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No hay Lista disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+
+        <section class="form-section">
+            <h2>Resultados de Análisis de Sangre</h2>
+            <form>
+                <div>
+                    <label for="hemoglobina">Hemoglobina (g/dL):</label>
+                    <input type="number" id="hemoglobina" name="hemoglobina" step="0.1" required>
+                </div>
+                <div>
+                    <label for="glucosa">Glucosa (mg/dL):</label>
+                    <input type="number" id="glucosa" name="glucosa" required>
+                </div>
+                <div>
+                    <label for="colesterol">Colesterol Total (mg/dL):</label>
+                    <input type="number" id="colesterol" name="colesterol" required>
+                </div>
+                <div>
+                    <label for="trigliceridos">Triglicéridos (mg/dL):</label>
+                    <input type="number" id="trigliceridos" name="trigliceridos" required>
+                </div>
+                <div>
+                    <label for="fecha_analisis">Fecha del Análisis:</label>
+                    <input type="date" id="fecha_analisis" name="fecha_analisis" required>
+                </div>
+                <div>
+                    <button type="submit">Guardar Resultados de Análisis</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="form-section">
+            <h2>Observaciones Adicionales</h2>
+            <form>
+                <div>
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea id="observaciones" name="observaciones" rows="4"></textarea>
+                </div>
+                <div>
+                    <label for="medico">Médico Responsable:</label>
+                    <input type="text" id="medico" name="medico" required>
+                </div>
+                <div>
+                    <button type="submit">Guardar Observaciones</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
