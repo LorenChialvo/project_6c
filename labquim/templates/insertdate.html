@@ -7,136 +7,182 @@
     <title>Laboratorios SAC - Ingreso de Datos</title>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      
+        @keyframes slideIn {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+      
         :root {
-            --primary-color: #0080ff;
-            --secondary-color: #f0f8ff;
-            --text-color: #333;
-            --background-color: #ffffff;
+          --primary-color: #0080ff;
+          --secondary-color: #f0f8ff;
+          --text-color: #333;
+          --background-color: #ffffff;
         }
-
+      
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
         }
-
+      
         body {
-            font-family: 'Figtree', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
+          font-family: 'Figtree', sans-serif;
+          line-height: 1.6;
+          color: var(--text-color);
+          background-color: var(--background-color);
+          animation: fadeIn 1s ease-out;
         }
-
+      
         .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+          width: 90%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 2rem;
         }
-
+      
         header {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-bottom: 2rem;
+          background-color: var(--primary-color);
+          color: white;
+          text-align: center;
+          padding: 2rem 0;
+          margin-bottom: 2rem;
+          animation: slideIn 0.5s ease-out;
         }
-
+      
         h1 {
-            font-weight: 600;
-            font-size: 2.5rem;
+          font-weight: 600;
+          font-size: 2.5rem;
+          animation: slideIn 0.7s ease-out;
         }
-
+      
         h2 {    
-            margin-top: 20px;
-            font-weight: 400;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+          margin-top: 20px;
+          font-weight: 400;
+          color: var(--primary-color);
+          margin-bottom: 1rem;
+          animation: slideIn 0.9s ease-out;
         }
-
+      
         .form-section {
-            background-color: var(--secondary-color);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          background-color: var(--secondary-color);
+          border-radius: 8px;
+          padding: 2rem;
+          margin-bottom: 2rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+      
+        .form-section:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+      
         form {
-            display: grid;
-            gap: 1rem;
+          display: grid;
+          gap: 1rem;
         }
-
+      
         label {
-            font-weight: 600;
+          font-weight: 600;
         }
-
+      
         input, select, textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: 'Figtree', sans-serif;
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-family: 'Figtree', sans-serif;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
+      
+        input:focus, select:focus, textarea:focus {
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 2px rgba(0, 128, 255, 0.2);
+          outline: none;
+        }
+      
         button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
+          background-color: var(--primary-color);
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: background-color 0.3s ease, transform 0.2s ease;
         }
-
+      
         button:hover {
-            background-color: #0066cc;
+          background-color: #0066cc;
+          transform: translateY(-2px);
         }
+      
+        button:active {
+          transform: translateY(0);
+        }
+      
         ul {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          list-style: none;
+          margin: 10px;
+          background-color: #fff;
+          padding: 10px;
+          border-radius: 10px;
+          animation: fadeIn 1s ease-out;
+        }
+      
+        li {
+          display: flex;
+          margin: 5px;
+          background-color: #0080ff;
+          border-radius: 10px;
+          color: #fff;
+          padding: 10px;
+          transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+      
+        li:hover {
+          transform: translateX(5px);
+          background-color: #0066cc;
+        }
+      
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 20px 0;
+          animation: fadeIn 1s ease-out;
+        }
+      
+        th, td {
+          padding: 12px; 
+          border: 1px solid #ddd; 
+          text-align: left; 
+          transition: background-color 0.3s ease;
+        }
+      
+        th {
+          background-color: #f2f2f2; 
+        }
+      
+        tr:hover {
+          background-color: #f1f1f1;
+        }
+      
+        @media (min-width: 768px) {
+          form {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            list-style: none;
-            margin: 10px;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 10px;
+            flex-wrap: wrap;
+          }
         }
-                li {
-            display: flex;
-            margin: 5px;
-            background-color: #0080ff;
-            border-radius: 10px;
-            /* padding-left: 10px; */
-            color: #fff;
-            padding: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse; /* Combina bordes */
-            margin: 20px 0; /* Margen superior e inferior */
-        }
-        th, td {
-            padding: 12px; 
-            border: 1px solid #ddd; 
-            text-align: left; 
-        }
-        th {
-            background-color: #f2f2f2; 
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        @media (min-width: 768px) {
-            form {
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+      </style>
 </head>
 <body>
     <header>
@@ -159,6 +205,7 @@
                         <th>nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
+                        <th>Tipo De Documento</th>
                         <th>Numero de Documento</th>
                     </tr>
                 </thead>
@@ -168,11 +215,12 @@
                             <td>{{ paciente.nombre }}</td>
                             <td>{{ paciente.apellido }}</td>
                             <td>{{ paciente.email }}</td>
+                            <td>{{ paciente.id_tipo_documento }}</td>
                             <td>{{ paciente.numero_documento }}</td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No hay Pacientes disponibles.</td>
+                            <td colspan="12">No hay Pacientes disponibles.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -204,7 +252,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No hay Medicos listados.</td>
+                            <td colspan="12">No hay Medicos listados.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -225,7 +273,8 @@
                         <th>nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>Numero de documento</th>
+                        <th>Tipo de Documento</th>
+                        <th>Numero De Documento</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -234,15 +283,55 @@
                             <td>{{ extraccionista.nombre }}</td>
                             <td>{{ extraccionista.apellido }}</td>
                             <td>{{ extraccionista.email }}</td>
+                            <td>{{ extraccionista.id_tipo_documento }}</td>
                             <td>{{ extraccionista.numero_documento }}</td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No hay Extraccionistas listados.</td>
+                            <td colspan="12">No hay Extraccionistas listados.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Estudios</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_insert_estudios.as_div }}
+                <input type="hidden" name="form_insert_estudios" value="1">
+                <button type="submit">Agregar Estudio</button> 
+            </form>
+            <h2>Lista Estudios</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id Estudio</th>
+                            <th>Tipo De Estudio</th>
+                            <th>Valor Minimo</th>
+                            <th>Valor Maximo</th>
+                            <th>Medida Utilizada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for estudios in estudios_list %}
+                            <tr>
+                                
+                                <td>{{ estudios.id_estudio }}</td>
+                                <td>{{ estudios.descripcion }}</td>
+                                <td>{{ estudios.valor_minimo }}</td>
+                                <td>{{ estudios.valor_maximo }}</td>
+                                <td>{{ estudios.cod_unidad_med }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="12">No hay Estudios insertados.</td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+   
         </section>
         <section class="form-section">
             <h2>Metodos Utilizados</h2>
@@ -268,7 +357,7 @@
                             </tr>
                         {% empty %}
                             <tr>
-                                <td colspan="4">No hay metodos insertados.</td>
+                                <td colspan="12">No hay metodos insertados.</td>
                                 
                             </tr>
                         {% endfor %}
@@ -303,7 +392,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No hay Lista disponibles.</td>
+                            <td colspan="12">No hay Lista disponibles.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -335,7 +424,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No hay Lista disponibles.</td>
+                            <td colspan="12">No hay Lista disponibles.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -367,7 +456,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No hay Lista disponibles.</td>
+                            <td colspan="12">No hay Lista disponibles.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -399,7 +488,86 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No hay Lista disponibles.</td>
+                            <td colspan="12">No hay Lista disponibles.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Solicitud de Analisis</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_soli_analisis.as_div }}
+                <input type="hidden" name="form_soli_analisis" value="1">
+                <div>
+                    <button type="submit">Insertar Solicitud de Analisis</button>  
+                </div>
+            </form>
+            <table>
+                <h2>Lista De Solicitudes</h2>
+                <thead>
+                    <tr>
+                       
+                        <th>Id De Solicitud</th>
+                        <th>Paciente</th>
+                        <th>Extraccionista</th>
+                        <th>Hora</th>
+                        <th>Medico</th>
+                        <th>Archivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for solicitud in list_soli_analisis %}
+                        <tr>
+                            <td>{{ solicitud.id_soli_analisis }}</td>
+                            <td>{{ solicitud.id_paciente }}</td>
+                            <td>{{ solicitud.id_extraccionista }}</td>
+                            <td>{{ solicitud.hora }}</td>
+                            <td>{{ solicitud.id_medico }}</td>
+                            <td>{{ solicitud.nombre_archivo }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12">No hay Solicitudes Listadas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section">
+            <h2>Insertar Historial de Solicitud</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_hist_soli.as_div }}
+                <input type="hidden" name="form_soli_analisis" value="1">
+                <div>
+                    <button type="submit">Insertar Historial de Solicitud</button>  
+                </div>
+            </form>
+            <table>
+                <h2>Lista De Historial de Solicitud</h2>
+                <thead>
+                    <tr>                      
+                        <th>Id De Solicitud</th>
+                        <th>Estado</th>
+                        <th>Fecha De Recepcion</th>
+                        <th>Fecha De Entrega</th>
+                        <th>Fecha Receta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for historial in list_hist_soli %}
+                        <tr>
+                            <td>{{ historial.id_hist_soli }}</td>
+                            <td>{{ historial.id_est_soli }}</td>
+                            <td>{{ historial.recepcion }}</td>
+                            <td>{{ historial.entrega }}</td>
+                            <td>{{ historial.receta }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12">No hay Solicitudes Listadas.</td>
                         </tr>
                     {% endfor %}
                 </tbody>

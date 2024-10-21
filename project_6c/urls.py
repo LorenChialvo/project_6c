@@ -16,13 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin    
 from django.urls import include, path
-from labquim.views import inicio , insertardatos , logintemplate, success , failed 
+from labquim.views import inicio , insertardatos , logintemplate, success , failed
     
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('logintemplate' , logintemplate.as_view()),
-     path('inicio' , inicio.as_view()),
-     path('insertar-datos' , insertardatos.as_view(), name='redirect' ),
-     path('success/', success.as_view(), name='success'),
-     path('failed/', failed.as_view(), name='failed'),
+    path('' , inicio.as_view()),
+    path('logintemplate' , logintemplate.as_view()),
+    path('inicio' , inicio.as_view()),
+    path('insertar-datos' , insertardatos.as_view(), name='redirect' ),
+    path('success', success.as_view(), name='success'),
+    path('failed', failed.as_view(), name='failed'),
 ]

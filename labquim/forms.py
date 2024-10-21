@@ -116,9 +116,78 @@ class insert_extraccionista(forms.ModelForm):
 class insert_estudios(forms.ModelForm):
     class Meta:
         model = Estudios
-        fields = ['nombre']
+        fields = ['descripcion','id_metodo','valor_minimo','valor_maximo','cod_unidad_med']
         labels = {
-            'nombre': 'Nombre del Estudio',
+            'descripcion': 'Tipo de Estudio',
+            'id_metodo': 'Metodo Utilizado',
+            'valor_minimo': 'Valor Minimo',
+            'valor_maximo': 'Valor Maximo',
+            'cod_unidad_med': 'Unidad de Medida',
         }   
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control'})
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'valor_minimo': forms.TextInput(attrs={'class': 'form-control'}),
+            'valor_maximo': forms.TextInput(attrs={'class': 'form-control'})
+        }
+        id_metodo = forms.ModelChoiceField(
+            queryset=Metodo.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un tipo de documento"  ),
+        cod_unidad_med = forms.ModelChoiceField(
+            queryset=UnidadMed.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione una unidad de medida"  )
+class insert_soli_analisis(forms.ModelForm):
+    class Meta:
+        model = SolicitudAnalisis
+        fields = ['id_paciente','id_extraccionista','hora','id_medico','nombre_archivo']
+        labels = {
+            'id_paciente': 'Paciente',
+            'id_extraccionista': 'Extraccionista',
+            'hora': 'Hora',
+            'id_medico': 'Medico',
+            'nombre_archivo': 'Nombre del Archivo',
+        }   
+        widgets = {
+            'id_paciente': forms.Select(attrs={'class': 'form-control'}),
+            'id_extraccionista': forms.Select(attrs={'class': 'form-control'}),
+            'hora': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
+            }
+        id_medico = forms.ModelChoiceField(
+            queryset=Medico.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un Medico"  )
+        id_paciente = forms.ModelChoiceField(
+            queryset=Paciente.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un Paciente")
+        id_extraccionista = forms.ModelChoiceField(
+            queryset=Extraccionista.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un Extraccionista"
+        )
+class insert_hist_solicitud(forms.ModelForm):
+    class Meta:
+        model = HistorialSolicitud
+        fields = ['id_soli_analisis','id_estado','fecha_recepcion','fecha_finalizacion','fecha_receta']
+        labels = {
+            'id_soli_analisis': 'Numero de Solicitud',
+            'id_estado': 'Estado de la Solicitud',
+            'fecha_recepcion': 'Fecha de Recepcion',
+            'fecha_finalizacion': 'Fecha de Finalizacion',
+            'fecha_receta': 'Fecha de Receta',
+        }   
+        widgets = {
+            'fecha_recepcion': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}), 
+            'fecha_finalizacion': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}), 
+            'fecha_receta':forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}),    
+        }
+        id_soli_analisis = forms.ModelChoiceField(
+            queryset=SolicitudAnalisis.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione una Solicitud"  )
+        id_estado= forms.ModelChoiceField(
+            queryset=EstadoSolicitud.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un Estado"
+        )
