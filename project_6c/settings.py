@@ -84,10 +84,15 @@ WSGI_APPLICATION = 'project_6c.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'labquim_db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'labquim_db',
+        'USER': 'loren',
+        'PASSWORD': 'aaaa',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
