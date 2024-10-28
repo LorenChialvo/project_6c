@@ -190,7 +190,7 @@
     </header>
 
     <main class="container">
-        <section class="form-section">
+        <section class="form-section" id="insertarylistarpaciente">
             <h2>Insertar Paciente</h2>
             <form method="post">
                 {% csrf_token %}
@@ -226,7 +226,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insylismedico">
             <h2>Insertar Medico</h2>
             <form method="post">
                 {% csrf_token %}
@@ -258,7 +258,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insylisextraccionista">
             <h2>Insertar Extraccionista</h2>
             <form method="post">
                 {% csrf_token %}
@@ -294,7 +294,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insylisestudios">
             <h2>Insertar Estudios</h2>
             <form method="post">
                 {% csrf_token %}
@@ -333,7 +333,7 @@
                 </table>
    
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insylismetutilizado">
             <h2>Metodos Utilizados</h2>
             <form method="post">
                 {% csrf_token %}
@@ -364,9 +364,8 @@
                     </tbody>
                 </table>
    
-        </section>
-        
-        <section class="form-section">
+        </section>     
+        <section class="form-section" id="insylistipdocum">
             <h2>Insertar Tipo de Documento</h2>
             <form method="post">
                 {% csrf_token %}
@@ -398,7 +397,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insylisunimed">
             <h2>Insertar Unidad De Medida</h2>
             <form method="post">
                 {% csrf_token %}
@@ -430,7 +429,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insylisestadosoli">
             <h2>Insertar Estado de Solicitud</h2>
             <form method="post">
                 {% csrf_token %}
@@ -462,7 +461,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insylisestestudio">
             <h2>Insertar Estado de Estudio</h2>
             <form method="post">
                 {% csrf_token %}
@@ -494,7 +493,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insertarylistarsolicitudanalisis">
             <h2>Insertar Solicitud de Analisis</h2>
             <form method="post">
                 {% csrf_token %}
@@ -535,7 +534,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="form-section">
+        <section class="form-section" id="insertarylistarhistorialsoli">
             <h2>Insertar Historial de Solicitud</h2>
             <form method="post">
                 {% csrf_token %}
@@ -573,53 +572,45 @@
                 </tbody>
             </table>
         </section>
-
-
-        <section class="form-section">
-            <h2>Resultados de Análisis de Sangre</h2>
-            <form>
+        <section class="form-section" id="insertarylistarhistorialestudio">
+            <h2>Insertar Historial de Estudios</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_hist_estudios.as_div }}
+                <input type="hidden" name="form_hist_estudios" value="1">
                 <div>
-                    <label for="hemoglobina">Hemoglobina (g/dL):</label>
-                    <input type="number" id="hemoglobina" name="hemoglobina" step="0.1" required>
-                </div>
-                <div>
-                    <label for="glucosa">Glucosa (mg/dL):</label>
-                    <input type="number" id="glucosa" name="glucosa" required>
-                </div>
-                <div>
-                    <label for="colesterol">Colesterol Total (mg/dL):</label>
-                    <input type="number" id="colesterol" name="colesterol" required>
-                </div>
-                <div>
-                    <label for="trigliceridos">Triglicéridos (mg/dL):</label>
-                    <input type="number" id="trigliceridos" name="trigliceridos" required>
-                </div>
-                <div>
-                    <label for="fecha_analisis">Fecha del Análisis:</label>
-                    <input type="date" id="fecha_analisis" name="fecha_analisis" required>
-                </div>
-                <div>
-                    <button type="submit">Guardar Resultados de Análisis</button>
+                    <button type="submit">Insertar Historial de Estudio</button>  
                 </div>
             </form>
+            <table>
+                <h2>Lista De Historial de Estudios</h2>
+                <thead>
+                    <tr>    
+                        <th>Id</th>                  
+                        <th>Id De Estudio</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for historial in list_hist_estudios %}
+                        <tr>
+                            <td>{{ historial.id_historial_estu }}</td>
+                            <td>{{ historial.id_estudio }}</td>
+                            <td>{{ historial.fecha_inicio }}</td>
+                            <td>{{ historial.fecha_fin }}</td>
+                            <td>{{ historial.id_estado }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12">No hay historial listado.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </section>
 
-        <section class="form-section">
-            <h2>Observaciones Adicionales</h2>
-            <form>
-                <div>
-                    <label for="observaciones">Observaciones:</label>
-                    <textarea id="observaciones" name="observaciones" rows="4"></textarea>
-                </div>
-                <div>
-                    <label for="medico">Médico Responsable:</label>
-                    <input type="text" id="medico" name="medico" required>
-                </div>
-                <div>
-                    <button type="submit">Guardar Observaciones</button>
-                </div>
-            </form>
-        </section>
     </main>
 </body>
 </html>

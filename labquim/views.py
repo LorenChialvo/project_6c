@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView , View
 from django.http import HttpResponse
 from .models import TipoDocumento , Paciente , Metodo , UnidadMed , Medico , Extraccionista, SolicitudAnalisis, EstadoSolicitud, Estudios, HistorialEstudios, HistorialSolicitud, EstadoEstudio
-from .forms import user_form , insert_paciente ,insert_type_document , insert_metodo, insert_unimed , insert_estado_solicitud,insert_estado_estudio, insert_medico,insert_extraccionista,insert_estudios,insert_soli_analisis , insert_hist_solicitud
+from .forms import user_form , insert_paciente ,insert_type_document , insert_metodo, insert_unimed , insert_estado_solicitud,insert_estado_estudio, insert_medico,insert_extraccionista,insert_estudios,insert_soli_analisis , insert_hist_solicitud, insert_hist_estudios
 
 
 def index(request):
@@ -37,9 +37,11 @@ class insertardatos(View):
     form_insert_estudios=insert_estudios
     form_inser_soli_analisis=insert_soli_analisis
     form_insert_hist_soli=insert_hist_solicitud
+    form_insert_hist_estudios=insert_hist_estudios
 
     def get(self, request, *args, **kwargs):
         insert_estudios = self.form_insert_estudios()
+        insert_hist_estudios = self.form_insert_hist_estudios()
         insert_paciente = self.form_insert_p()
         insert_metodo = self.form_insert_method()
         insert_type_document = self.form_insert_td()
@@ -61,6 +63,7 @@ class insertardatos(View):
         list_extraccionistas=Extraccionista.objects.all()
         list_estudios=Estudios.objects.all()
         list_soli_analisis=SolicitudAnalisis.objects.all()
+        list_hist_estudios=HistorialEstudios.objects.all()
 
         context = {
             'form_paciente': insert_paciente,
@@ -71,6 +74,7 @@ class insertardatos(View):
             'form_est_soli': insert_estado_solicitud,'form_extrac':insert_extraccionista,
             'form_est_estu':insert_estado_estudio,
             'form_soli_analisis':insert_soli_analisis,
+            'form_hist_estudios':insert_hist_estudios,
             'form_medico':insert_medico,
             'form_hist_soli':insert_hist_solicitud,
             'medicos_list':list_medicos,
@@ -83,8 +87,8 @@ class insertardatos(View):
             'list_estados':list_estados,
             'pacientes_list': list_pacientes,
             'list_extraccionistas':list_extraccionistas,
-            'list_soli_analisis':list_soli_analisis
-            
+            'list_soli_analisis':list_soli_analisis,
+            'list_hist_estudios':list_hist_estudios
         }
 
         return render(request, self.template_name, context)
@@ -217,6 +221,20 @@ class insertardatos(View):
                     fecha_recepcion=formhist_soli.cleaned_data['fecha_recepcion'],
                     fecha_finalizacion=formhist_soli.cleaned_data['fecha_finalizacion'],
                     fecha_receta=formhist_soli.cleaned_data['fecha_receta'],
+                )
+                insert_h.save()  
+                return redirect('success')  
+            else:
+                return redirect('failed')
+        elif 'form_hist_estudios' in request.POST:
+            formhist_estudios = insert_hist_estudios(request.POST)
+            if formhist_estudios.is_valid():
+                insert_h = HistorialEstudios(
+                    id_estudio=formhist_estudios.cleaned_data['id_estudio'],
+                    fecha_inicio=formhist_estudios.cleaned_data['fecha_inicio'],
+                    fecha_fin=formhist_estudios.cleaned_data['fecha_fin'],
+                    id_estado=formhist_estudios.cleaned_data['id_estado'],
+
                 )
                 insert_h.save()  
                 return redirect('success')  

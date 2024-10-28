@@ -2,7 +2,7 @@ from django import forms
 from .models import USerForm , Paciente , TipoDocumento , Muestra , Resultados , Estudios , HistorialEstudios , HistorialSolicitud  , EstadoEstudio , EstadoSolicitud , UnidadMed , Extraccionista , Medico , SolicitudAnalisis, Metodo
 
 class user_form(forms.ModelForm):
-    class   Meta:
+    class Meta:
         model = USerForm
         fields = ['dni', 'cap']
         widgets = {
@@ -171,23 +171,48 @@ class insert_hist_solicitud(forms.ModelForm):
         model = HistorialSolicitud
         fields = ['id_soli_analisis','id_estado','fecha_recepcion','fecha_finalizacion','fecha_receta']
         labels = {
-            'id_soli_analisis': 'Numero de Solicitud',
+            'id_soli_analisis': 'Solicitud de Analisis',
             'id_estado': 'Estado de la Solicitud',
             'fecha_recepcion': 'Fecha de Recepcion',
             'fecha_finalizacion': 'Fecha de Finalizacion',
-            'fecha_receta': 'Fecha de Receta',
-        }   
+            'fecha_receta': 'Fecha de la Receta',
+        }
         widgets = {
-            'fecha_recepcion': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}), 
-            'fecha_finalizacion': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}), 
-            'fecha_receta':forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}),    
+            'fecha_recepcion': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'fecha_finalizacion': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'fecha_receta': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
         id_soli_analisis = forms.ModelChoiceField(
             queryset=SolicitudAnalisis.objects.all(),  
             widget=forms.Select(attrs={'class': 'form-control'}),
-            empty_label="Seleccione una Solicitud"  )
-        id_estado= forms.ModelChoiceField(
+            empty_label="Seleccione una Solicitud de Analisis"
+        )
+        id_estado = forms.ModelChoiceField(
             queryset=EstadoSolicitud.objects.all(),  
             widget=forms.Select(attrs={'class': 'form-control'}),
-            empty_label="Seleccione un Estado"
+            empty_label="Seleccione un estado de la Solicitud"
+        )
+class insert_hist_estudios(forms.ModelForm):
+    class Meta:
+        model = HistorialEstudios
+        fields = ['id_estudio','fecha_inicio','fecha_fin','id_estado']
+        labels = {
+            'id_estudio': 'Estudio',
+            'fecha_inicio': 'Fecha de Inicio',
+            'fecha_fin': 'Fecha de Fin',
+            'id_estado': 'Estado del Estudio',
+        }
+        widgets = {
+            'fecha_inicio': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'fecha_fin':forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }
+        id_estudio = forms.ModelChoiceField(
+            queryset=Estudios.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un Estudio"
+        )
+        id_estado = forms.ModelChoiceField(
+            queryset=EstadoEstudio.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un estado del Estudio"
         )
