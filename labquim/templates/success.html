@@ -1,11 +1,9 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Consulta Fallida</title>
+    <title>Consulta Enviada con Éxito</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -40,7 +38,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .icon {
-            color: #d42c07;
+            color: #47b62c;
             width: 64px;
             height: 64px;
             margin: 0 auto 1rem;
@@ -81,14 +79,13 @@
     <div class="container">
         <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
             </svg>
         </div>
-        <h1>Error en la subida de datos</h1>
-        <p>Lo sentimos, no hemos podido enviar los datos a la base de datos. Por favor, intenta nuevamente.</p>
-        <a href="{% url 'redirect' %}" class="btn">Volver al Inicio</a>
+        <h1>Subida De Datos Éxitosa</h1>
+        <p>Los datos ingresados se han subido correctamente a la base de datos.</p>
+        <a href="{% url 'redirect' %}" class="btn">Volver al Cargar datos</a>
     </div>
 </body>
 </html>

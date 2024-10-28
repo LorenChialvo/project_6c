@@ -86,12 +86,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'labquim_db',
-        'USER': 'loren',
-        'PASSWORD': 'aaaa',
+        'USER': 'root',
+        'PASSWORD': 'aaa123',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
+
 
 
 

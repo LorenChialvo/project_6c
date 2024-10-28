@@ -11,18 +11,25 @@ class EstadoEstudio(models.Model):
 class EstadoSolicitud(models.Model):
     id_estado = models.AutoField(primary_key=True)
     estado = models.CharField(max_length=255)
-    
+    def __str__(self):
+        return self.estado
 class UnidadMed(models.Model):
     cod_unidad_med = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
+    def __str__(self):
+        return self.nombre 
 
 class Metodo(models.Model):
     id_metodo = models.AutoField(primary_key=True)
-    descripcion = models.CharField(max_length=255)
+    descripcion = models.CharField  (max_length=255)
+    def __str__(self):
+        return self.descripcion 
 
 class TipoDocumento(models.Model):
     id_tipo_documento = models.AutoField(primary_key=True)
     tipo_documento = models.CharField(max_length=255)
+    def __str__(self):
+        return self.tipo_documento
 
 class Paciente(models.Model):
     id_paciente = models.AutoField(primary_key=True)
@@ -31,12 +38,16 @@ class Paciente(models.Model):
     email = models.EmailField()
     id_tipo_documento = models.ForeignKey(TipoDocumento, on_delete=models.CASCADE)
     numero_documento = models.IntegerField()
+    def __str__(self):
+        return self.nombre
 
 class Medico(models.Model):
     id_medico = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     apellido = models.CharField(max_length=255)
     especializacion = models.CharField(max_length=255)
+    def __str__(self):
+        return self.nombre
 
 class Extraccionista(models.Model):
     id_extraccionista = models.AutoField(primary_key=True)
@@ -45,26 +56,34 @@ class Extraccionista(models.Model):
     email = models.EmailField()
     id_tipo_documento = models.ForeignKey(TipoDocumento, on_delete=models.CASCADE)
     numero_documento = models.IntegerField()
+    def __str__(self):
+        return self.nombre
 
 class Muestra(models.Model):
     id_muestra = models.AutoField(primary_key=True)
     tipo_muestra = models.CharField(max_length=255)
+    def __str__(self):
+        return self.tipo_muestra 
 
 class Estudios(models.Model):
     id_estudio = models.AutoField(primary_key=True)
     descripcion = models.CharField(max_length=255)
     id_metodo = models.ForeignKey(Metodo, on_delete=models.CASCADE)
+    #id_estado_estudio = models.ForeignKey(EstadoEstudio, on_delete=models.CASCADE)
     valor_minimo = models.FloatField()
     valor_maximo = models.FloatField()
     cod_unidad_med = models.ForeignKey(UnidadMed, on_delete=models.CASCADE)
 
 class SolicitudAnalisis(models.Model):
     id_soli_analisis = models.AutoField(primary_key=True)
+    #id_estado_solicitud= models.ForeignKey(EstadoSolicitud, on_delete=models.CASCADE)
     id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     id_extraccionista = models.ForeignKey(Extraccionista, on_delete=models.CASCADE)
     hora = models.TimeField()
     id_medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     nombre_archivo = models.CharField(max_length=255)
+    def __str__(self):
+        return str(self.id_soli_analisis)
 
 class HistorialSolicitud(models.Model):
     id_historial_soli = models.AutoField(primary_key=True)
