@@ -493,6 +493,38 @@
                 </tbody>
             </table>
         </section>
+        <section class="form-section" id="insertarylistarmuestras">
+            <h2>Insertar Muestra</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_muestra.as_div }}
+                <input type="hidden" name="form_muestra" value="1">
+                <div>
+                    <button type="submit">Insertar Muestra</button>  
+                </div>
+            </form>
+            <table>
+                <h2>Lista De Muestras</h2>
+                <thead>
+                    <tr>    
+                        <th>Nro de Muestra</th>
+                        <th>Muestra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for muestra in muestras_list %}
+                        <tr>
+                            <td>{{ muestra.id_muestra }}</td>
+                            <td>{{ muestra.tipo_muestra }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12">No hay Muestras listadas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
         <section class="form-section" id="insertarylistarsolicitudanalisis">
             <h2>Insertar Solicitud de Analisis</h2>
             <form method="post">
@@ -508,7 +540,7 @@
                 <thead>
                     <tr>
                        
-                        <th>Id De Solicitud</th>
+                        <th>Nro De Solicitud</th>
                         <th>Paciente</th>
                         <th>Extraccionista</th>
                         <th>Hora</th>
@@ -539,7 +571,7 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form_hist_soli.as_div }}
-                <input type="hidden" name="form_soli_analisis" value="1">
+                <input type="hidden" name="form_hist_soli" value="1">
                 <div>
                     <button type="submit">Insertar Historial de Solicitud</button>  
                 </div>
@@ -548,21 +580,21 @@
                 <h2>Lista De Historial de Solicitud</h2>
                 <thead>
                     <tr>                      
-                        <th>Id De Solicitud</th>
-                        <th>Estado</th>
+                        <th>Nro De Solicitud</th>
+                        <th>Estado De Solicitud</th>
                         <th>Fecha De Recepcion</th>
-                        <th>Fecha De Entrega</th>
+                        <th>Fecha De Finalizacion</th>
                         <th>Fecha Receta</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for historial in list_hist_soli %}
                         <tr>
-                            <td>{{ historial.id_hist_soli }}</td>
-                            <td>{{ historial.id_est_soli }}</td>
-                            <td>{{ historial.recepcion }}</td>
-                            <td>{{ historial.entrega }}</td>
-                            <td>{{ historial.receta }}</td>
+                            <td>{{ historial.id_soli_analisis }}</td>
+                            <td>{{ historial.id_estado }}</td>
+                            <td>{{ historial.fecha_recepcion }}</td>
+                            <td>{{ historial.fecha_finalizacion }}</td>
+                            <td>{{ historial.fecha_receta }}</td>
                         </tr>
                     {% empty %}
                         <tr>
@@ -586,8 +618,8 @@
                 <h2>Lista De Historial de Estudios</h2>
                 <thead>
                     <tr>    
-                        <th>Id</th>                  
-                        <th>Id De Estudio</th>
+                        <th>ID</th>                  
+                        <th>Nro De Estudio</th>
                         <th>Fecha Inicio</th>
                         <th>Fecha Fin</th>
                         <th>Estado</th>
@@ -605,6 +637,44 @@
                     {% empty %}
                         <tr>
                             <td colspan="12">No hay historial listado.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="form-section" id="insertarylistarresultados">
+            <h2>Insertar Resultados</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form_resultados.as_div }}
+                <input type="hidden" name="form_resultados" value="1">
+                <div>
+                    <button type="submit">Insertar Historial de Estudio</button>  
+                </div>
+            </form>
+            <table>
+                <h2>Lista De Resultados</h2>
+                <thead>
+                    <tr>    
+                        <th>Nro de Solicitud</th>
+                        <th>Muestra</th>
+                        <th>Valor Hallado</th>
+                        <th>Estado</th>
+                        <th>Observaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resultados in resultados_list %}
+                        <tr>
+                            <td>{{ resultados.id_soli_analisis }}</td>
+                            <td>{{ resultados.id_muestra }}</td>
+                            <td>{{ resultados.valor_hallado }}</td>
+                            <td>{{ resultados.id_estado }}</td>
+                            <td>{{ resultados.observaciones }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="12">No hay resultados listados.</td>
                         </tr>
                     {% endfor %}
                 </tbody>

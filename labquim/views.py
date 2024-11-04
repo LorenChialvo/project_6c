@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView , View
 from django.http import HttpResponse
-from .models import TipoDocumento , Paciente , Metodo , UnidadMed , Medico , Extraccionista, SolicitudAnalisis, EstadoSolicitud, Estudios, HistorialEstudios, HistorialSolicitud, EstadoEstudio
-from .forms import user_form , insert_paciente ,insert_type_document , insert_metodo, insert_unimed , insert_estado_solicitud,insert_estado_estudio, insert_medico,insert_extraccionista,insert_estudios,insert_soli_analisis , insert_hist_solicitud, insert_hist_estudios
+from .models import TipoDocumento , Paciente , Metodo , UnidadMed , Medico , Extraccionista, SolicitudAnalisis, EstadoSolicitud, Estudios, HistorialEstudios, HistorialSolicitud, EstadoEstudio, Resultados, Muestra
+from .forms import user_form , insert_paciente ,insert_type_document , insert_metodo, insert_unimed , insert_estado_solicitud,insert_estado_estudio, insert_medico,insert_extraccionista,insert_estudios,insert_soli_analisis , insert_hist_solicitud, insert_hist_estudios, insert_resultados, insert_muestra
 
 
 def index(request):
@@ -38,6 +38,8 @@ class insertardatos(View):
     form_inser_soli_analisis=insert_soli_analisis
     form_insert_hist_soli=insert_hist_solicitud
     form_insert_hist_estudios=insert_hist_estudios
+    form_insert_resultados=insert_resultados
+    form_insert_muestra=insert_muestra
 
     def get(self, request, *args, **kwargs):
         insert_estudios = self.form_insert_estudios()
@@ -47,13 +49,16 @@ class insertardatos(View):
         insert_type_document = self.form_insert_td()
         insert_unimed = self.form_insert_unimed()
         insert_estado_solicitud = self.form_insert_est_soli()
+        insert_muestra = self.form_insert_muestra()
         insert_medico= self.form_insert_medico()
         insert_estado_estudio=self.form_insert_est_estu()
         insert_extraccionista=self.form_insert_extrac()
         insert_soli_analisis=self.form_inser_soli_analisis()
         insert_hist_solicitud=self.form_insert_hist_soli()
+        form_insert_resultados=self.form_insert_resultados()
         list_hist_soli=HistorialSolicitud.objects.all()
         list_type_documents = TipoDocumento.objects.all()
+        list_muestras = Muestra.objects.all()
         list_pacientes = Paciente.objects.all()
         list_metodos = Metodo.objects.all()
         list_unimed = UnidadMed.objects.all()
@@ -64,6 +69,8 @@ class insertardatos(View):
         list_estudios=Estudios.objects.all()
         list_soli_analisis=SolicitudAnalisis.objects.all()
         list_hist_estudios=HistorialEstudios.objects.all()
+        list_hist_soli=HistorialSolicitud.objects.all()
+        list_resultados=Resultados.objects.all()
 
         context = {
             'form_paciente': insert_paciente,
@@ -77,6 +84,10 @@ class insertardatos(View):
             'form_hist_estudios':insert_hist_estudios,
             'form_medico':insert_medico,
             'form_hist_soli':insert_hist_solicitud,
+            'form_resultados':form_insert_resultados,
+            'form_muestra':insert_muestra,
+            'muestras_list':list_muestras,
+            'resultados_list':list_resultados,
             'medicos_list':list_medicos,
             'metodo_list': list_metodos,
             'unimed_list': list_unimed,
@@ -217,10 +228,10 @@ class insertardatos(View):
             if formhist_soli.is_valid():
                 insert_h = HistorialSolicitud(
                     id_soli_analisis=formhist_soli.cleaned_data['id_soli_analisis'],
-                    id_estado=formhist_soli.cleaned_data['id_estado'],
                     fecha_recepcion=formhist_soli.cleaned_data['fecha_recepcion'],
                     fecha_finalizacion=formhist_soli.cleaned_data['fecha_finalizacion'],
                     fecha_receta=formhist_soli.cleaned_data['fecha_receta'],
+                    id_estado=formhist_soli.cleaned_data['id_estado'],
                 )
                 insert_h.save()  
                 return redirect('success')  
@@ -238,6 +249,27 @@ class insertardatos(View):
                 )
                 insert_h.save()  
                 return redirect('success')  
+            else:
+                return redirect('failed')
+        elif 'form_muestra' in request.POST:
+            form_muestra = insert_muestra(request.POST)
+            if form_muestra.is_valid():
+                insert_m = Muestra(
+                    tipo_muestra=form_muestra.cleaned_data['tipo_muestra'])
+                insert_m.save()
+                return redirect('success')
+            else:
+                return redirect('failed')
+        elif 'form_resultados' in request.POST:
+            form_resultados = insert_resultados(request.POST)
+            if form_resultados.is_valid():
+                insert_r = Resultados(
+                    id_soli_analisis=form_resultados.cleaned_data['id_soli_analisis'],
+                    id_muestra=form_resultados.cleaned_data['id_muestra'],
+                    valor_hallado=form_resultados.cleaned_data['valor_hallado'],
+                    observaciones=form_resultados.cleaned_data['observaciones'],)
+                insert_r.save()
+                return redirect('success')
             else:
                 return redirect('failed')
 class success(View):
