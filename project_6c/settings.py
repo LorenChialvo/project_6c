@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'project_6c.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'labquim_db',
+        'NAME': 'labquim_db_fin',
         'USER': 'root',
         'PASSWORD': 'aaa123',
         'HOST': 'localhost',

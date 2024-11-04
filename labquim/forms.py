@@ -190,7 +190,7 @@ class insert_hist_solicitud(forms.ModelForm):
         id_estado = forms.ModelChoiceField(
             queryset=EstadoSolicitud.objects.all(),  
             widget=forms.Select(attrs={'class': 'form-control'}),
-            empty_label="Seleccione un estado de la Solicitud"
+            empty_label="Seleccione un Estado de la Solicitud"
         )
 class insert_hist_estudios(forms.ModelForm):
     class Meta:
@@ -216,3 +216,44 @@ class insert_hist_estudios(forms.ModelForm):
             widget=forms.Select(attrs={'class': 'form-control'}),
             empty_label="Seleccione un estado del Estudio"
         )
+class insert_resultados(forms.ModelForm):
+    class Meta:
+        model = Resultados
+        fields = ['id_soli_analisis','id_muestra','valor_hallado', 'id_estado', 'observaciones']
+        labels = {
+            'id_soli_analisis': 'Solicitud de Analisis',
+            'id_muestra': 'Muestra',
+            'valor_hallado': 'Valor Hallado',
+            'id_estado': 'Estado del Estudio',
+            'observaciones': 'Observaciones',
+        }   
+        widgets = {
+            'valor_hallado': forms.TextInput(attrs={'class': 'form-control'}),
+            'observaciones': forms.TextInput(attrs={'class': 'form-control'}),
+            
+        }
+        id_soli_analisis = forms.ModelChoiceField(
+            queryset=SolicitudAnalisis.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione una Solicitud de Analisis"
+        )
+        id_muestra = forms.ModelChoiceField(
+            queryset=Muestra.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione una muestra"
+        )
+        id_estado = forms.ModelChoiceField(
+            queryset=EstadoEstudio.objects.all(),  
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            empty_label="Seleccione un estado del Estudio"
+        )
+class insert_muestra(forms.ModelForm):
+    class Meta:
+        model = Muestra
+        fields = ['tipo_muestra']
+        labels = {
+            'tipo_muestra': 'Tipo de Muestra',
+        }   
+        widgets = {
+            'tipo_muestra': forms.TextInput(attrs={'class': 'form-control'})
+        }

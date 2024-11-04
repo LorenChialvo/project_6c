@@ -71,7 +71,6 @@ class Estudios(models.Model):
     id_estudio = models.AutoField(primary_key=True)
     descripcion = models.CharField(max_length=255)
     id_metodo = models.ForeignKey(Metodo, on_delete=models.CASCADE)
-    #id_estado_estudio = models.ForeignKey(EstadoEstudio, on_delete=models.CASCADE)
     valor_minimo = models.FloatField()
     valor_maximo = models.FloatField()
     cod_unidad_med = models.ForeignKey(UnidadMed, on_delete=models.CASCADE)
@@ -80,7 +79,6 @@ class Estudios(models.Model):
 
 class SolicitudAnalisis(models.Model):
     id_soli_analisis = models.AutoField(primary_key=True)
-    #id_estado_solicitud= models.ForeignKey(EstadoSolicitud, on_delete=models.CASCADE)
     id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     id_extraccionista = models.ForeignKey(Extraccionista, on_delete=models.CASCADE)
     hora = models.TimeField()
